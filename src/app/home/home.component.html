@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<div class="row">
+    <div class="col-md-8 mt-4 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Contacts {{Date | date:"longDate" | uppercase}}</h3> <!-- pipe :"|" to do some specifications -->
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Num</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contact of Contacts">
+                            <td>{{contact.nom | uppercase}}</td>
+                            <td>{{contact.prenom | titlecase }}</td>
+                            <td>{{contact.num | json}}</td>
+                            <td *ngIf="contact.status == 'active';else inactive">active</td>
+                            <ng-template #inactive> <!-- ng template indique le contenu de else-->
+                                <td>en attente</td>
+                            </ng-template>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
