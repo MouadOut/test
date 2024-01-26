@@ -18,10 +18,21 @@
                             <td>{{contact.nom | uppercase}}</td>
                             <td>{{contact.prenom | titlecase }}</td>
                             <td>{{contact.num | json}}</td>
-                            <td *ngIf="contact.status == 'active';else inactive">active</td>
-                            <ng-template #inactive> <!-- ng template indique le contenu de else-->
-                                <td>en attente</td>
-                            </ng-template>
+                            <td [ngSwitch]="contact.status">
+                                <span *ngSwitchCase="'active'" class="badge badge-success p-2 text-white">
+                                    Active
+                                </span>
+                                <span *ngSwitchCase="'inactive'" class="badge badge-danger p-2 text-white">
+                                    En Attente
+                                </span>
+                                <span *ngSwitchDefault class="badge badge-danger p-2 text-white">
+                                    En Attente
+                                </span>
+                            </td>
+                       <!-- <td *ngIf="contact.status == 'active';else inactive">Active</td>
+                            <ng-template #inactive> //ng template indique le contenu de else
+                                <td>En Attente</td>
+                            </ng-template> -->
                         </tr>
                     </tbody>
                 </table>
