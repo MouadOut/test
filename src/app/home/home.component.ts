@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContactService } from '../contact.service';
 
 interface Contact {
   nom: string;
@@ -19,19 +20,18 @@ export class HomeComponent implements OnInit {
   Date!: Date;
   Contacts! : Contact[];
 
-  constructor() {}
+  constructor(private contactService : ContactService) {}
 
   ngOnInit() {
     // this.Nom = "Outirste";
     // this.Prenom = "Mouad";
     // this.Num = 21000736;
+    this.Contacts = this.contactService.getContacts();
     this.Date = new Date();
-    this.Contacts = [
-      {nom:"outirste",prenom:"mouad",num:+212650078678,status:"active"},
-      {nom:"el jabli",prenom:"saad",num:+212645782159,status:"inactive"},
-      {nom:"outirste",prenom:"ayoub",num:+212654789654,status:"inactive"},
-      {nom:"hakimi",prenom:"achraf",num:+212615478965,status:"active"}
-
-    ]
+  
+  }
+  removeContact(i : number) {
+    //console.log(i);
+    this.Contacts.splice(i,1);
   }
 }

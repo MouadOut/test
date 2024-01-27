@@ -11,10 +11,11 @@
                             <th>Prenom</th>
                             <th>Num</th>
                             <th>status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let contact of Contacts">
+                        <tr *ngFor="let contact of Contacts, let i = index">
                             <td>{{contact.nom | uppercase}}</td>
                             <td>{{contact.prenom | titlecase }}</td>
                             <td>{{contact.num | json}}</td>
@@ -33,6 +34,11 @@
                             <ng-template #inactive> //ng template indique le contenu de else
                                 <td>En Attente</td>
                             </ng-template> -->
+                            <td>
+                                <button class="btn btn-sm btn-danger"
+                                    (click)="removeContact(i)"
+                                ><i class="fa fa-trash"></i></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
